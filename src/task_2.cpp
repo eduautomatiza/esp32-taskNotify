@@ -2,6 +2,8 @@
 
 #include "task_manager.h"
 
+extern TaskHandle_t loopTaskHandle;
+
 void setup2(void) {
   enableLoop2WDT();
 
@@ -11,7 +13,9 @@ void setup2(void) {
 
 void loop2(void) {
   // put your main code here, to run repeatedly:
+  uint32_t receivedValue;
 
-  Serial.println("loop 2");
-  delay(3000);
+  if (xTaskNotifyWait(0, ULONG_MAX, &receivedValue, 1000) == pdPASS) {
+    xTaskNotify(loopTaskHandle, receivedValue, eSetValueWithOverwrite);
+  }
 }
