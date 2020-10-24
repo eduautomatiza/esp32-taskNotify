@@ -1,4 +1,4 @@
-# esp32-task-example
+# esp32-taskNotify
 
 Example of taskNotify(), freeRTOS, for ESP32 running two tasks.
 
